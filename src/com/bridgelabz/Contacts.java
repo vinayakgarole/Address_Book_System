@@ -1,9 +1,8 @@
 package com.bridgelabz;
 
 public class Contacts {
-
-    private String firstName, lastName, address, city, state, email, phoneNumber;
-    private int zip;
+    public String firstName, lastName, address, city, state, email, phoneNumber;
+    public int zip;
 
     public Contacts(String firstName, String lastName, String address, String city, String state, String email, int zip, String phoneNumber) {
         this.firstName = firstName;
@@ -72,11 +71,26 @@ public class Contacts {
         this.zip = zip;
     }
 
-    public String getPhoneNumber() {
+    public String getPhoneNo() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
+    public void setPhoneNo(String phoneNo) {
         this.phoneNumber = phoneNumber;
     }
+
+    @Override
+    public String toString() {
+        return "Contacts{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", email='" + email + '\'' +
+                ", zip=" + zip +
+                ", phoneNo=" + phoneNumber +
+                '}';
+    }
 }
+

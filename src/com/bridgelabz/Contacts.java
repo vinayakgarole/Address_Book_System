@@ -2,17 +2,19 @@ package com.bridgelabz;
 
 public class Contacts {
 
-    public String firstName, lastName, address, city, state, email, phoneNumber;
+    public String firstName, lastName, address, city, state, email;
     public int zip;
-    public Contacts(String firstName, String lastName, String address, String city, String state, String email, int zip, String phoneNumber) {
+    public long phoneNumber;
+
+    public Contacts(String firstName, String lastName, String address, String city, String state, String email, long phoneNumber, int zip) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.city = city;
         this.state = state;
         this.email = email;
-        this.zip = zip;
         this.phoneNumber = phoneNumber;
+        this.zip = zip;
     }
 
     public String getFirstName() {
@@ -63,6 +65,14 @@ public class Contacts {
         this.email = email;
     }
 
+    public long getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(long phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public int getZip() {
         return zip;
     }
@@ -71,26 +81,8 @@ public class Contacts {
         this.zip = zip;
     }
 
-    public String getPhoneNo() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNo(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
     @Override
     public String toString() {
-        return "Contacts { " +
-                "firstName = " + firstName + "\n" +
-                ", lastName = " + lastName + "\n" +
-                ", address = " + address + "\n" +
-                ", city = " + city + "\n" +
-                ", state = " + state + "\n" +
-                ", email = " + email + "\n" +
-                ", phoneNumber = " + phoneNumber + "\n" +
-                ", zip = " + zip +
-                '}';
+        return "Contacts{" + "firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", address='" + address + '\'' + ", city='" + city + '\'' + ", state='" + state + '\'' + ", email='" + email + '\'' + ", phoneNumber='" + phoneNumber + '\'' + ", zip=" + zip + '}';
     }
 }
-

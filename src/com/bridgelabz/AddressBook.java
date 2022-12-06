@@ -27,92 +27,101 @@ public class AddressBook {
         System.out.println("Enter the Zip: ");
         int zip = sc.nextInt();
         System.out.println("Enter the Phone No: ");
-        String phoneNumber = sc.nextLine();
+        long phoneNumber = sc.nextLong();
         sc.nextLine();
         System.out.println("Enter the Email: ");
         String email = sc.nextLine();
 
-        Contacts contact = new Contacts(firstName, lastName, address, city, state, email, zip, phoneNumber);
+        Contacts contact = new Contacts(firstName, lastName, address, city, state, email, phoneNumber, zip);
         return contact;
     }
 
     public void addContact(Contacts createPerson) {
         System.out.println("Adding a New Contacts for " + createPerson.firstName);
         ContactList.add(createPerson);
+        System.out.println((createPerson));
     }
 
     public void editContact() {
+        boolean isContactFound = false;
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter First Name of Contacts to Edit it");
         String cName = sc.nextLine();
-        Contacts editContact = ContactList.get(cName.indexOf(cName));
 
-        if (editContact.getFirstName().equals(cName)) {
+        for (Contacts contact : ContactList) {
 
-            System.out.println("Which Details You Would Like To Edit ?");
-            System.out.println("Press - 1 for First Name \nPress - 2 for Last Name \n" + "Press - 3 for Address \nPress - 4 for City \nPress - 5 for State \nPress - 6 for Zip \n" + "Press - 7 for Phone No. \nPress - 8 for Email");
+            if (contact.getFirstName().equals(cName)) {
+                isContactFound = true;
+                System.out.println("Which Details You Would Like To Edit ?");
+                System.out.println("Press - 1 for First Name \nPress - 2 for Last Name \n" + "Press - 3 for Address \nPress - 4 for City \nPress - 5 for State \nPress - 6 for Zip \n" + "Press - 7 for Phone No. \nPress - 8 for Email");
 
-            int num = sc.nextInt();
+                int num = sc.nextInt();
 
-            switch (num) {
-                case 1:
-                    System.out.println("Enter New First Name");
-                    sc.nextLine();
-                    String fName = sc.nextLine();
-                    editContact.setFirstName(fName);
-                    System.out.println("Update a Sucessfully " + fName);
-                    break;
-                case 2:
-                    System.out.println("Enter New Last Name");
-                    sc.nextLine();
-                    String lName = sc.nextLine();
-                    editContact.setLastName(lName);
-                    System.out.println("Update a Sucessfully " + lName);
-                    break;
-                case 3:
-                    System.out.println("Enter New Address");
-                    sc.nextLine();
-                    String address = sc.nextLine();
-                    editContact.setAddress(address);
-                    System.out.println("Update a Sucessfully " + address);
-                    break;
-                case 4:
-                    System.out.println("Enter New City");
-                    sc.nextLine();
-                    String city = sc.nextLine();
-                    editContact.setCity(city);
-                    System.out.println("Update a Sucessfully " + city);
-                    break;
-                case 5:
-                    System.out.println("Enter New State");
-                    sc.nextLine();
-                    String state = sc.nextLine();
-                    editContact.setState(state);
-                    System.out.println("Update a Sucessfully " + state);
-                    break;
-                case 6:
-                    System.out.println("Enter New Zip");
-                    int zip = sc.nextInt();
-                    editContact.setZip(zip);
-                    System.out.println("Update a Sucessfully " + zip);
-                    break;
-                case 7:
-                    System.out.println("Enter New Phone Number");
-                    String phoneNumber = sc.nextLine();
-                    editContact.setPhoneNo(phoneNumber);
-                    System.out.println("Update a Sucessfully " + phoneNumber);
-                    break;
-                case 8:
-                    System.out.println("Enter New Email");
-                    sc.nextLine();
-                    String email = sc.nextLine();
-                    editContact.setEmail(email);
-                    System.out.println("Update a Sucessfully " + email);
-                    break;
-                default:
-                    System.out.println("No Edit");
-                    return;
+                switch (num) {
+                    case 1:
+                        System.out.println("Enter New First Name");
+                        sc.nextLine();
+                        String fName = sc.nextLine();
+                        contact.setFirstName(fName);
+                        System.out.println("Update a Successfully " + fName);
+                        break;
+                    case 2:
+                        System.out.println("Enter New Last Name");
+                        sc.nextLine();
+                        String lName = sc.nextLine();
+                        contact.setLastName(lName);
+                        System.out.println("Update a Successfully " + lName);
+                        break;
+                    case 3:
+                        System.out.println("Enter New Address");
+                        sc.nextLine();
+                        String address = sc.nextLine();
+                        contact.setAddress(address);
+                        System.out.println("Update a Successfully " + address);
+                        break;
+                    case 4:
+                        System.out.println("Enter New City");
+                        sc.nextLine();
+                        String city = sc.nextLine();
+                        contact.setCity(city);
+                        System.out.println("Update a Successfully " + city);
+                        break;
+                    case 5:
+                        System.out.println("Enter New State");
+                        sc.nextLine();
+                        String state = sc.nextLine();
+                        contact.setState(state);
+                        System.out.println("Update a Successfully " + state);
+                        break;
+                    case 6:
+                        System.out.println("Enter New Zip");
+                        int zip = sc.nextInt();
+                        contact.setZip(zip);
+                        System.out.println("Update a Successfully " + zip);
+                        break;
+                    case 7:
+                        System.out.println("Enter New Phone Number");
+                        long phoneNumber = sc.nextLong();
+                        contact.setPhoneNumber(phoneNumber);
+                        System.out.println("Update a Successfully " + phoneNumber);
+                        break;
+                    case 8:
+                        System.out.println("Enter New Email");
+                        sc.nextLine();
+                        String email = sc.nextLine();
+                        contact.setEmail(email);
+                        System.out.println("Update a Successfully " + email);
+                        break;
+                    default:
+                        System.out.println("No Edit");
+                }
+                break;
             }
+
+        }
+
+        if (isContactFound) {
+            System.out.println("Contact Updated Successfully..");
         } else {
             System.out.println("No such contact");
         }
@@ -151,7 +160,7 @@ public class AddressBook {
     public static void main(String[] args) {
 
         System.out.println("Welcome to the Address Book System");
-        int ch = 0;
+        int ch;
         Scanner sc = new Scanner(System.in);
         AddressBook AD = new AddressBook();
 

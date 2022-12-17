@@ -63,25 +63,35 @@ public class AddressBookMain {
         addressBook.addContact(input(scanner));
         System.out.println("Enter city you want contacts for");
         String city = scanner.next();
+        System.out.println("Enter state you want contacts for");
+        String state = scanner.next();
 
         /*
          * For iterating the map we take a variable e  and iterating over every addressbook in the map and temp is a variable of
          * type AddressBook like we take int a. In temp we are getting values of addressbooks one by one from map further for-each
          * loop to iterate persons in the addressbook and if person city equal to the input city then printing it.
          */
-        System.out.println("Contacts of person in the same city are ");
+        int count1 = 0;
+        int count2 = 0;
 
         for (Map.Entry<String, AddressBook> e : map.entrySet()) {
-
             AddressBook temp = e.getValue();
 
             for (Contacts contact : temp.getAddressbook()) {
 
                 if (contact.getCity().equalsIgnoreCase(city)) {
-
+                    System.out.println("Contacts of person in the same city are ");
+                    count1++;
                     temp.printAddressBook(contact);
+                } else if (contact.getState().equalsIgnoreCase(state)) {
+                    System.out.println("Contacts of person in the same state are ");
+                    count2++;
+                    temp.printAddressBook(contact);
+
                 }
             }
         }
+        System.out.println("Number of persons in the same city in addressbook are: " + count1);
+        System.out.println("Number of persons in the same state in addressbook are: " + count2);
     }
 }

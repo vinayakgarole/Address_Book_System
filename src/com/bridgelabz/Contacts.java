@@ -10,7 +10,9 @@ public class Contacts {
     private int zip;
     private String phoneNumber;
 
-    public Contacts(String firstName, String lastName, String address, String city, String state, int zip, String phoneNumber) {
+    private String email;
+
+    public Contacts(String firstName, String lastName, String address, String city, String state, int zip, String phoneNumber, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -18,6 +20,7 @@ public class Contacts {
         this.state = state;
         this.zip = zip;
         this.phoneNumber = phoneNumber;
+        this.email = email;
     }
 
     public String getFirstName() {
@@ -76,6 +79,14 @@ public class Contacts {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "Contacts{" +
@@ -86,6 +97,8 @@ public class Contacts {
                 ", state='" + state + '\'' +
                 ", zip=" + zip +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 }
+

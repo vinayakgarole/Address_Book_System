@@ -1,123 +1,108 @@
 package com.bridgelabz;
 
-import java.util.*;
-import java.util.stream.Collectors;
+
+import java.io.*;
 
 public class AddressBookMain {
 
-    public static Contacts getInput() {
+    public static String readFromTheFile() throws IOException {
+        /*
+         * 1) Read the file
+         */
+        File file = new File("C:\\Users\\Infinty system\\IdeaProjects\\Address_Book_System\\src\\com\\bridgelabz\\AddressBook.txt");
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Add details of a person you want to edit");
+        /*
+         * 2) Create the object for input stream
+         */
+        InputStream inputStream = new FileInputStream(file);
 
-        System.out.println("Please provide first name");
-        String firstName = scanner.next();
+        /*
+         * 3) Create object of InputStreamReader
+         */
+        InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
 
-        System.out.println("Please provide Last name");
-        String lastName = scanner.next();
+        /*
+         * 4) Create BufferedReader gateway
+         */
+        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
-        System.out.println("Please provide address");
-        String address = scanner.next();
+        /*
+         * 5) Create StringBuilder (As strings are immutable)
+         */
+        StringBuilder stringBuilder = new StringBuilder();
 
-        System.out.println("Please provide city");
-        String city = scanner.next();
+        /*
+         * 6) Create result String
+         */
+        String result;
 
-        System.out.println("Please provide state");
-        String state = scanner.next();
+        /*
+         * 7) Read the data line by line and compare
+         */
+        while ((result = bufferedReader.readLine()) != null) {
 
-        System.out.println("Please provide zip");
-        int zip = scanner.nextInt();
+            /*
+             * 8) Put the data into stringBuilder
+             */
+            stringBuilder.append(result).append("\n");
+        }
 
-        System.out.println("Please provide phone number");
-        String phoneNumber = scanner.next();
+        /*
+         * 9) Close stringBuilder
+         */
+        bufferedReader.close();
 
-        System.out.println("Please provide email");
-        String email = scanner.next();
+        /*
+         * 10) Print data
+         */
+        System.out.println("Before Adding the AddressBook is: ");
 
-        Contacts contact = new Contacts(firstName, lastName, address, city, state, zip, phoneNumber, email);
-        return contact;
+        System.out.println(stringBuilder);
+
+        return stringBuilder.toString();
+
     }
 
-    public static void main(String[] args) {
-
-        Scanner scanner = new Scanner(System.in);
+    public static void writeInTheFile() throws IOException {
         /*
-         * Adding Contacts details using Constructor of person class
+         * Making a contact named as person
          */
-        Contacts contact1 = new Contacts("Vinayak", "Garole", "Ranale", "Nandurbar", "Maharashtra", 425411, "8380867601", "vinayakgarole10@gamil.com");
-        Contacts contact2 = new Contacts("Sandeep", "Pangare", "Rajale", "Nandurbar", "Maharashtra", 425411, "8380864512", "aegag@jef.com");
-        Contacts contact3 = new Contacts("Surabhi", "Bhagat", "Kotharud", "Pune", "Maharashtra", 92226, "4849849840", "dsaef@gmail.com");
-        Contacts contact4 = new Contacts("Rahul", "Bhosale", "Satara", "Satara", "Maharashtra", 986544, "44948270", "fbzb@gmail.com");
-        Contacts contact5 = new Contacts("Suchendra", "Mishra", "Mahur", "Vithol", "Jharakhand", 26556, "2554654", "dthbdthb@gamil.com");
-        Contacts contact6 = new Contacts("Sumit", "Kumar", "Bandra", "Bandra", "Maharashtra", 462156, "4849849", "dgthd@gamil.com");
+        Contacts person = new Contacts("Vinayak", "Garole", "Ranale", "Nandurbar", "Maharashtra", 425411, "8380867601");
 
         /*
-         * Adding contacts to different address books by using addContact method means every single address book
-         * has multiple contacts
+         * Storing reading file into a String Message from file
          */
-        AddressBook addressBook = new AddressBook();
-        addressBook.addContact(contact1);
-        addressBook.addContact(contact2);
-        addressBook.addContact(contact3);
-        addressBook.addContact(contact4);
-        addressBook.addContact(contact5);
-        addressBook.addContact(contact6);
-        Contacts contact = getInput();
-        addressBook.addContact(contact);
+
+        String messageFromFile = readFromTheFile();
+        /*
+         * Adding person to the read file
+         */
+
+        String finalMessage = messageFromFile + person;
 
         /*
-         * Taking a new list of type Contact named as sortedaddressbook. In this we are sorting the contacts
-         * Using their first name in alphabetically manner using Comparator and comparing by getting first name.
+         * Giving location of the file where we have to write the file
          */
-        List<Contacts> sortedByCity = addressBook.getAddressbook().stream().sorted(Comparator.comparing(Contacts::getCity)).collect(Collectors.toList());
 
-        List<Contacts> sortedByZipCode = addressBook.getAddressbook().stream().sorted(Comparator.comparing(Contacts::getZip)).collect(Collectors.toList());
-
-        List<Contacts> sortedByState = addressBook.getAddressbook().stream().sorted(Comparator.comparing(Contacts::getState)).collect(Collectors.toList());
-        /*
-         * Printing the different sorted list one by one
-         */
-        System.out.println("Contacts sorted by City are : ");
-        sortedByCity.forEach(System.out::println);
-        System.out.println();
-        System.out.println("Contacts sorted by State are : ");
-        sortedByState.forEach(System.out::println);
-        System.out.println();
-        System.out.println("Contacts sorted by ZipCode are : ");
-        sortedByZipCode.forEach(System.out::println);
-        System.out.println();
-        System.out.println();
+        FileWriter fileWriter = new FileWriter("C:\\Users\\Infinty system\\IdeaProjects\\Address_Book_System\\src\\com\\bridgelabz\\AddressBook.txt");
 
         /*
-         * Multiple sorting is done by using thenComparing keyword in this we are sorting by city and state
-         * both simultaneously
+         * Write the file with the Contact we have to add
          */
-
-        List<Contacts> sortedByCityAndState = addressBook.getAddressbook().stream().sorted(Comparator.comparing(Contacts::getCity).thenComparing(Contacts::getState)).collect(Collectors.toList());
+        fileWriter.write(finalMessage);
 
         /*
-         * Printed the sorted list by city and state both
+         * Printing the file after writing the input in the file
          */
-        System.out.println("Contacts which are sorted by city and state : ");
-        sortedByCityAndState.forEach(System.out::println);
-        System.out.println();
-
+        System.out.println("After Writing the AddressBook is : ");
+        System.out.println(finalMessage);
         /*
-         * Another way to do multiple sorting by using multiple fields
+         * Closing the file Writer
          */
-        Comparator<Contacts> compareByCity = Comparator.comparing(Contacts::getCity);
-        Comparator<Contacts> compareByState = Comparator.comparing(Contacts::getState);
-        Comparator<Contacts> compareByZipCode = Comparator.comparing(Contacts::getZip);
+        fileWriter.close();
+    }
 
-
-        // Sorting on multiple fields (3-level) using Method Reference
-
-        List<Contacts> sortedByCityStateAndZipCode = addressBook.getAddressbook().stream().sorted(compareByZipCode.thenComparing(compareByState).thenComparing(compareByCity)).collect(Collectors.toList());
-
-        /*
-         * Printing the Multiple fields sorted Contact list using for-each loop
-         */
-        System.out.println("Contacts which are sorted by city,state and zipcode are : ");
-        sortedByCityStateAndZipCode.forEach(System.out::println);
+    public static void main(String[] args) throws IOException {
+        writeInTheFile();
     }
 }

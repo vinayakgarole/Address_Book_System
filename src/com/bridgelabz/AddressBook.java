@@ -4,18 +4,18 @@ import java.util.ArrayList;
 
 public class AddressBook {
 
-    ArrayList<Contacts> addressBook = new ArrayList<Contacts>();
+    ArrayList<Contacts> addressbook = new ArrayList<Contacts>();
 
     public ArrayList<Contacts> addContact(Contacts contact) {
-        this.addressBook.add(contact);
-        return this.addressBook;
+        this.addressbook.add(contact);
+        return this.addressbook;
     }
 
-    public ArrayList<Contacts> getAddressBook() {
-        return addressBook;
+    public ArrayList<Contacts> getAddressbook() {
+        return addressbook;
     }
 
-    public void setAddressBook(ArrayList<Contacts> addressBook) {
-        this.addressBook = addressBook;
+    public void setAddressbook(ArrayList<Contacts> addressbook) {
+        this.addressbook = addressbook;
     }
 }

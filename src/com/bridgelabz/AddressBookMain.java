@@ -44,7 +44,7 @@ public class AddressBookMain {
         /*
          * Adding Contacts details using Constructor of person class
          */
-        Contacts contact1 = new Contacts("Vinayak", "Garole", "Ranale", "Nandurbar", "Maharashtra", 425411, "8380867601", "vinayakgarole10@gamil.com" );
+        Contacts contact1 = new Contacts("Vinayak", "Garole", "Ranale", "Nandurbar", "Maharashtra", 425411, "8380867601", "vinayakgarole10@gamil.com");
         Contacts contact2 = new Contacts("Sandeep", "Pangare", "Rajale", "Nandurbar", "Maharashtra", 425411, "8380864512", "aegag@jef.com");
         Contacts contact3 = new Contacts("Surabhi", "Bhagat", "Kotharud", "Pune", "Maharashtra", 92226, "4849849840", "dsaef@gmail.com");
         Contacts contact4 = new Contacts("Rahul", "Bhosale", "Satara", "Satara", "Maharashtra", 986544, "44948270", "fbzb@gmail.com");
@@ -69,7 +69,55 @@ public class AddressBookMain {
          * Taking a new list of type Contact named as sortedaddressbook. In this we are sorting the contacts
          * Using their first name in alphabetically manner using Comparator and comparing by getting first name.
          */
-        List<Contacts> sortedaddressbook = addressBook.getAddressBook().stream().sorted(Comparator.comparing(Contacts::getFirstName)).collect(Collectors.toList());
-        sortedaddressbook.forEach(System.out::println);
+        List<Contacts> sortedByCity = addressBook.getAddressbook().stream().sorted(Comparator.comparing(Contacts::getCity)).collect(Collectors.toList());
+
+        List<Contacts> sortedByZipCode = addressBook.getAddressbook().stream().sorted(Comparator.comparing(Contacts::getZip)).collect(Collectors.toList());
+
+        List<Contacts> sortedByState = addressBook.getAddressbook().stream().sorted(Comparator.comparing(Contacts::getState)).collect(Collectors.toList());
+        /*
+         * Printing the different sorted list one by one
+         */
+        System.out.println("Contacts sorted by City are : ");
+        sortedByCity.forEach(System.out::println);
+        System.out.println();
+        System.out.println("Contacts sorted by State are : ");
+        sortedByState.forEach(System.out::println);
+        System.out.println();
+        System.out.println("Contacts sorted by ZipCode are : ");
+        sortedByZipCode.forEach(System.out::println);
+        System.out.println();
+        System.out.println();
+
+        /*
+         * Multiple sorting is done by using thenComparing keyword in this we are sorting by city and state
+         * both simultaneously
+         */
+
+        List<Contacts> sortedByCityAndState = addressBook.getAddressbook().stream().sorted(Comparator.comparing(Contacts::getCity).thenComparing(Contacts::getState)).collect(Collectors.toList());
+
+        /*
+         * Printed the sorted list by city and state both
+         */
+        System.out.println("Contacts which are sorted by city and state : ");
+        sortedByCityAndState.forEach(System.out::println);
+        System.out.println();
+
+        /*
+         * Another way to do multiple sorting by using multiple fields
+         */
+        Comparator<Contacts> compareByCity = Comparator.comparing(Contacts::getCity);
+        Comparator<Contacts> compareByState = Comparator.comparing(Contacts::getState);
+        Comparator<Contacts> compareByZipCode = Comparator.comparing(Contacts::getZip);
+
+
+        // Sorting on multiple fields (3-level) using Method Reference
+
+        List<Contacts> sortedByCityStateAndZipCode = addressBook.getAddressbook().stream().sorted(compareByZipCode.thenComparing(compareByState).thenComparing(compareByCity)).collect(Collectors.toList());
+
+        /*
+         * Printing the Multiple fields sorted Contact list using for-each loop
+         */
+        System.out.println("Contacts which are sorted by city,state and zipcode are : ");
+        sortedByCityStateAndZipCode.forEach(System.out::println);
     }
 }
